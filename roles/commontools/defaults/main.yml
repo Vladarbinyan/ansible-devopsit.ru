@@ -11,3 +11,5 @@ commontools:
  - bash-completion
  - zip
  - tzdata
+
+timezone: Europe/Moscow
