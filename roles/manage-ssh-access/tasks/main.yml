@@ -1,6 +1,6 @@
 - name: Update SSH keys
   authorized_key:
-    user: root
+    user: ubuntu
     key: "{{ lookup('pipe','cat files/pub_keys/*.pub') }}"
     state: present
     exclusive: yes
