@@ -1,0 +1,43 @@
+---
+- name: Install & enable ufw & allow ssh on 22 port 
+  block:
+    - name: Install ufw 
+      apt: 
+        name: ufw
+    - name: Allow ssh through firewall
+      ufw:
+        rule: allow 
+        proto: tcp
+        port: '22'
+    - name: Set ufw policy
+      ufw: 
+        state: enabled
+        direction: incoming 
+        policy: deny
+  tags: 
+    - ufw
+
+- name: Allow http & https
+  block:
+    - name: Allow all access to tcp port 80
+      ufw: 
+        rule: allow
+        port: "{{ app_http_port }}"
+        proto: tcp
+    - name: Allow all access to tcp port 443
+      ufw: 
+        rule: allow
+        port: "{{ app_https_port }}"
+        proto: tcp
+  when: "'appservers' in group_names"
+  tags:
+  - ufw_allow_web
+
+- name: Allow access to mysql
+  ufw:
+   rule: allow
+   port: "{{ mysql_port }}"
+   proto: tcp
+  when: "'dbservers' in group_names"
+  tags:
+    - ufw_allow_mysql
