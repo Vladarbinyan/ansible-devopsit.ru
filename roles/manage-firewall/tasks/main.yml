@@ -80,3 +80,13 @@
   when: "'monservers' in group_names"
   tags:
     - ufw_allow_node_exporter
+
+
+- name: Allow access to grafana
+  ufw:
+   rule: allow
+   port: "{{ grafana }}"
+   proto: tcp
+  when: "'monservers' in group_names"
+  tags:
+    - ufw_allow_grafana
