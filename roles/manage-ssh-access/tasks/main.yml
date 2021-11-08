@@ -4,3 +4,4 @@
     key: "{{ lookup('pipe','cat files/pub_keys/*.pub') }}"
     state: present
     exclusive: yes
+    

@@ -19,12 +19,12 @@
 
 - name: Allow http & https
   block:
-    - name: Allow all access to tcp port 80
+    - name: Allow access http
       ufw: 
         rule: allow
         port: "{{ app_http_port }}"
         proto: tcp
-    - name: Allow all access to tcp port 443
+    - name: Allow access https
       ufw: 
         rule: allow
         port: "{{ app_https_port }}"
@@ -41,3 +41,42 @@
   when: "'dbservers' in group_names"
   tags:
     - ufw_allow_mysql
+
+- name: Allow access to prometheus
+  ufw:
+   rule: allow
+   port: "{{ prometheus_http }}"
+   proto: tcp
+  when: "'monservers' in group_names"
+  tags:
+    - ufw_allow_prometheus_http
+
+- name: Allow access to alertmanager
+  block:
+    - name: Allow all access to alertmanager custom http port
+      ufw: 
+        rule: allow
+        port: "{{ alert_manager_http }}"
+        proto: tcp
+    - name: Allow all access to custom port tcp 
+      ufw: 
+        rule: allow
+        port: "{{ alert_manager }}"
+        proto: tcp
+    - name: Allow all access to custom port udp 
+      ufw: 
+        rule: allow
+        port: "{{ alert_manager }}"
+        proto: udp
+  when: "'monservers' in group_names"
+  tags:
+  - ufw_allow_alertmanager
+
+- name: Allow access to node_exporter
+  ufw:
+   rule: allow
+   port: "{{ node_exporter }}"
+   proto: tcp
+  when: "'monservers' in group_names"
+  tags:
+    - ufw_allow_node_exporter
