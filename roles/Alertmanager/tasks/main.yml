@@ -1,0 +1,5 @@
+---
+# tasks file for Alertmanager
+
+- name: Install Alertmanager
+  include_tasks: tasks/install_alertmanager.yml

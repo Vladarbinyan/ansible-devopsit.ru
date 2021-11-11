@@ -1,0 +1,7 @@
+---
+# handlers file for Alertmanager
+
+- name: systemd reload
+  systemd:
+    daemon_reload: yes
+
