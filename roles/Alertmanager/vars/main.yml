@@ -1,0 +1,4 @@
+---
+# vars file for Alertmanager
+
+alertmanager_version : 0.23.0

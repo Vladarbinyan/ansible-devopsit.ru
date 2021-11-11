@@ -1,0 +1,7 @@
+---
+# handlers file for Prometheus
+
+- name: systemd reload
+  systemd:
+    daemon_reload: yes
+

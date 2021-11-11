@@ -1,0 +1,7 @@
+---
+# tasks file for Grafana
+
+
+  
+- name: Install Grafana
+  include_tasks: tasks/install_grafana.yml

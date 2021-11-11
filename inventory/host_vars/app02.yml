@@ -1,0 +1,13 @@
+# Unison vars
+
+unison_configs:
+  - name: sync-wordpress
+    src: /var/www/wordpress
+    dest: ssh://app01//var/www/wordpress
+    ignore:
+      - "Path .git/*"
+      - "Name *.{log,tmp}"
+
+unison_cron:
+  hour: '*'
+  minute: '*/5'
