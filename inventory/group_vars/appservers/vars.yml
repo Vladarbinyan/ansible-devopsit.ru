@@ -1,7 +1,7 @@
 ---
-server_name: "devopsit.ru" # тут ваш домен 
+server_name: "devopsit.ru"  
+# db_hostname: ""
 ssl_cert_path: "/etc/ssl"
-  
 
 nginx_vhosts:
   - listen: "80"
@@ -28,7 +28,7 @@ nginx_vhosts:
           include fastcgi_params;
       }
       ssl_certificate     {{ ssl_cert_path }}/crt/{{ server_name }}.crt;
-      ssl_certificate_key {{ ssl_cert_path }}/private/{{ server_name }}.pem;
+      ssl_certificate_key {{ ssl_cert_path }}/private/{{ server_name }}.key;
       ssl_protocols       TLSv1.1 TLSv1.2;
       ssl_ciphers         HIGH:!aNULL:!MD5;
 
@@ -40,6 +40,7 @@ php_fpm_handler_state: restarted
 php_max_execution_time: "90"
 php_upload_max_filesize: "256M"
 php_webserver_daemon: "nginx"
+php_version: "7.4"
 php_packages:
   - php
   - php-cli

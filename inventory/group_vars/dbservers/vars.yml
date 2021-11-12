@@ -1,8 +1,8 @@
-# ---> moved to VAULT
+
 # mysql_db: "" 
 # mysql_user: ""
 # mysql_password: "!"
-# <--- moved to VAULT
+
 
 mysql_databases:
   - name: "{{ mysql_db }}"
