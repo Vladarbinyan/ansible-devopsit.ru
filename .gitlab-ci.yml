@@ -36,5 +36,5 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - ansible --version
     - ls -la
-    - ansible-playbook test.yml -v --private-key $ssh-key
+    - ansible-playbook test.yml -v --private-key $ssh-key -i ./inventory/hosts.yml
   when: manual
