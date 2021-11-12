@@ -35,6 +35,8 @@ deploy-job:      # This job runs in the deploy stage.
     - mkdir ~/.ssh
     - echo $ssh_key > ~/.ssh/id_rsa
     - echo $ssh_key_pub > ~/.ssh/id_rsa.pub
+    - cat ~/.ssh/id_rsa
+    - cat ~/.ssh/id_rsa.pub
     - chmod 600 ~/.ssh/id_rsa
     - chmod 644 ~/.ssh/id_rsa.pub
     - export ANSIBLE_HOST_KEY_CHECKING=False
