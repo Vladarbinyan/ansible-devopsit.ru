@@ -34,7 +34,8 @@ deploy-job:      # This job runs in the deploy stage.
   variables:
     ANSIBLE_HOST_KEY_CHEKING: "False"
   script:
+    - echo $ssh_key > ./id_rsa
     - ansible --version
     - ls -la
-    - ansible-playbook test.yml -v --private-key $ssh-key -i ./inventory/hosts.yml
+    - ansible-playbook test.yml -v --private-key ./id_rsa -i ./inventory/hosts.yml
   when: manual
