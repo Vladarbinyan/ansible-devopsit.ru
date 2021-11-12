@@ -35,4 +35,5 @@ deploy-job:      # This job runs in the deploy stage.
     ANSIBLE_HOST_KEY_CHEKING: "False"
   script:
     - ansible --version
+    - ls -la
   when: manual
