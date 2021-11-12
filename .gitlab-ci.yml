@@ -42,5 +42,6 @@ deploy-job:      # This job runs in the deploy stage.
     - export ANSIBLE_HOST_KEY_CHECKING=False
     - ansible --version
 #    - ansible-playbook test.yml -u ubuntu -vvv --private-key ~/.ssh/id_rsa -i ./inventory/hosts.yml
-    - ansible-playbook test.yml -i ./inventory/hosts.yml -e 'ansible_user=ubuntu' -e 'ansible_password=$ansible_password' -v
+    - export ansible_password=$ansible_password
+    - ansible-playbook test.yml -i ./inventory/hosts.yml -e 'ansible_user=ubuntu' -v
   when: manual
