@@ -38,5 +38,5 @@ deploy-job:      # This job runs in the deploy stage.
     - cat ./id_rsa
     - ansible --version
     - ls -la
-    - ansible-playbook test.yml -u ubuntu -v --private-key ./id_rsa -i ./inventory/hosts.yml
+    - ansible-playbook test.yml -u ubuntu -v --private-key=./id_rsa -i ./inventory/hosts.yml
   when: manual
