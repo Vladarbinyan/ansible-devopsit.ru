@@ -39,6 +39,7 @@ deploy-job:      # This job runs in the deploy stage.
     - echo $ssh_key_pub > ~/.ssh/id_rsa.pub
     - cat ~/.ssh/id_rsa
     - cat ~/.ssh/id_rsa.pub
+    - echo $ANSIBLE_HOST_KEY_CHECKING
     - ansible --version
     - ansible-playbook test.yml -u ubuntu -vvv --private-key ~/.ssh/id_rsa -i ./inventory/hosts.yml
   when: manual
