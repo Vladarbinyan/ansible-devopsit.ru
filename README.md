@@ -32,4 +32,4 @@ MIT
 Author Information
 ------------------
 
-https://github.com/Vladarbinyan/
+Командный проект ГБ. Вторая команда 
