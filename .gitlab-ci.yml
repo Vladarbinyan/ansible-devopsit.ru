@@ -7,9 +7,9 @@ stages:
 test-job:
   stage: test
   script:
-    - echo $ssh_key > id_rsa
+    - cat $ssh_key > id_rsa
     - cat id_rsa
-    - echo $ssh_key_pub > id_rsa.pub
+    - cat $ssh_key_pub > id_rsa.pub
     - cat id_rsa.pub
   when: manual
 
