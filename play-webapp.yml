@@ -1,0 +1,11 @@
+---
+- hosts: "{{ target }}"
+  become: yes
+  become_method: sudo
+  vars:
+    db_hostname: "{{ db_hostname }}"
+  roles:
+    - {role: nginx}
+    - {role: php}
+    - {role: wordpress}
+    - {role: unison}

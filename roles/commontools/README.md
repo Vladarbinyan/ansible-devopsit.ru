@@ -1,28 +1,28 @@
 Роль commontools
 =========
 
-Запуск
-------------
-
-ansible-playbook commontools.yml -u ubuntu --extra-vars "target=production"
-
 Role Variables
 --------------
-
-target 
 
 Dependencies
 ------------
 
 None
 
-
-
 Example Playbook
 ----------------
+play-commontools.yml
+---
+- hosts: "{{ target }}"
+  become: yes
+  become_method: sudo
+  roles:
+    - {role: commontools}
 
-ansible-playbook commontools.yml -u ubuntu --extra-vars "target=production"
+Play
+------------
 
+ansible-playbook play-commontools.yml -u ubuntu --extra-vars "target=production"
 
 License
 -------

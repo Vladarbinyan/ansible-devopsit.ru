@@ -1,0 +1,24 @@
+# Unison vars
+
+unison_configs:
+  - name: sync-wordpress
+    src: "/var/www/{{ server_name }}/wordpress"
+    dest: "ssh://app02//var/www/{{ server_name }}/wordpress"
+    ignore:
+      - "Path .git/*"
+      - "Name *.{log,tmp}"
+
+unison_cron:
+  hour: '*'
+  minute: '*/3'
+
+# nginx upstreams
+
+nginx_upstreams: 
+- name: devopsit.ru
+  strategy: "ip_hash" # "least_conn", etc.
+  keepalive: 16 # optional 
+  servers: { 
+    "app01.devopsit.ru",
+    "app02.devopsit.ru weight=2",
+  }
