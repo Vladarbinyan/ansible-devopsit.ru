@@ -1,0 +1,21 @@
+
+
+stages:
+#  - test
+  - deploy
+
+deploy-job:
+  stage: deploy
+  image:
+    name: gableroux/ansible:4.6.0
+  script:
+    # https://docs.gitlab.com/ee/ci/ssh_keys/
+    - eval $(ssh-agent -s)
+    - mkdir ~/.ssh/
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - export ANSIBLE_HOST_KEY_CHECKING=False
+    - echo "$ANSIBLE_VAULT_PASS" > ./vault_pass
+    - ansible --version
+    - ansible-playbook test.yml -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+  when: manual
