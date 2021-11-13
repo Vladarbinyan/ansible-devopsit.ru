@@ -4,8 +4,8 @@ stages:
 #  - test
   - deploy
 
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy   # It only runs when *both* jobs in the test stage complete successfully.
+deploy-job:
+  stage: deploy
   image:
     name: gableroux/ansible:4.6.0
   script:
@@ -13,14 +13,8 @@ deploy-job:      # This job runs in the deploy stage.
     - eval $(ssh-agent -s)
     - mkdir ~/.ssh/
     - chmod 700 ~/.ssh
-#    - echo "$SSH_CONFIG" > ~/.ssh/config
-#    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-#    - chmod 644 ~/.ssh/known_hosts
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - export ANSIBLE_HOST_KEY_CHECKING=False
     - ansible --version
-#    - echo $ANSIBLE_USER
-#    - echo $ANSIBLE_PASSWORD
     - ansible-playbook test.yml -v -i ./inventory/hosts.yml
-#    - ansible-playbook test.yml -i ./inventory/hosts.yml -e ansible_user=$ANSIBLE_USER -e ansible_password=$ANSIBLE_PASSWORD -vvv
   when: manual
