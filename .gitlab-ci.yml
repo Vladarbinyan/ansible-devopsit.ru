@@ -34,5 +34,5 @@ deploy-job:      # This job runs in the deploy stage.
     - echo $ANSIBLE_USER
     - echo $ANSIBLE_PASSWORD
 #    - ansible-playbook test.yml -u ubuntu -vvv --private-key ~/.ssh/id_rsa -i ./inventory/hosts.yml
-    - ansible-playbook test.yml -i ./inventory/hosts.yml -e 'ansible_user=$ANSIBLE_USER' -e 'ansible_password=$ANSIBLE_PASSWORD' -v
+    - ansible-playbook test.yml -i ./inventory/hosts.yml -e ansible_user=$ANSIBLE_USER -e ansible_password=$ANSIBLE_PASSWORD -v
   when: manual
