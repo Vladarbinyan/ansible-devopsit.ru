@@ -4,11 +4,6 @@ stages:
 #  - test
   - deploy
 
-variables:
-  ANSIBLE_USER: $ansible_user
-  ANSIBLE_PASSWORD: $ansible_password
-
-
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy   # It only runs when *both* jobs in the test stage complete successfully.
   image:
@@ -26,6 +21,6 @@ deploy-job:      # This job runs in the deploy stage.
     - ansible --version
 #    - echo $ANSIBLE_USER
 #    - echo $ANSIBLE_PASSWORD
-    - ansible-playbook test.yml -vvv -i ./inventory/hosts.yml
+    - ansible-playbook test.yml -v -i ./inventory/hosts.yml
 #    - ansible-playbook test.yml -i ./inventory/hosts.yml -e ansible_user=$ANSIBLE_USER -e ansible_password=$ANSIBLE_PASSWORD -vvv
   when: manual
