@@ -11,7 +11,7 @@ test-job:
     - cat id_rsa
     - echo $ssh_key_pub > id_rsa.pub
     - cat id_rsa.pub
-when: manual
+  when: manual
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy   # It only runs when *both* jobs in the test stage complete successfully.
