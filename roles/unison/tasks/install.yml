@@ -6,24 +6,13 @@
     name: unison
     state: latest
 
-- name: Create user group www-data
-  group:
-    name: www-data
-    state: present
-
-- name: Create user for Unison backup-data
-  user:
-    name: backup-data
-    group: www-data
-    password_lock: "yes"
-
 - name: Copy SSH keys
   copy:
     src: '{{ file.name }}'
     mode: '{{ file.mode }}'
-    owner: backup-data
+    owner: www-data
     group: www-data
-    dest: '/home/backup-data/.ssh/'
+    dest: '/home/www-data/.ssh/'
     force: yes
   loop:
     - mode: '600'
