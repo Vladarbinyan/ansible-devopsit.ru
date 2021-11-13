@@ -1,7 +1,8 @@
-# порты для серверов приложений и mysql
-app_http_port: '80'
-app_https_port: '443'
-mysql_port: '3306'
+
+# # порты для серверов приложений и mysql
+# app_http_port: '80'
+# app_https_port: '443'
+# mysql_port: '3306'
 
 # для сервера мониторинга 
     # TCP 9090 — http для сервера прометеус.
@@ -9,9 +10,9 @@ mysql_port: '3306'
     # TCP и UDP 9094 — для алерт менеджера.
     # TCP 9100 — для node_exporter.
     
-prometheus_http: '9090'
-grafana: '3000'
-alert_manager_http: '9093'
-alert_manager: '9094'
-node_exporter: '9100' 
+# prometheus_http: '9090'
+# grafana_tcp: '3000'
+# alert_manager_http: '9093'
+# alert_manager: '9094'
+# node_exporter_tcp: '9100' 
 

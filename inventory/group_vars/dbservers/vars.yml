@@ -3,6 +3,7 @@
 # mysql_user: ""
 # mysql_password: "!"
 
+mysql_port: '3306'
 
 mysql_databases:
   - name: "{{ mysql_db }}"
