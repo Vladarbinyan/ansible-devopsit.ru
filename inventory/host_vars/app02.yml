@@ -2,8 +2,8 @@
 
 unison_configs:
   - name: sync-wordpress
-    src: /var/www/wordpress
-    dest: ssh://app01//var/www/wordpress
+    src: "/var/www/{{ server_name }}/wordpress"
+    dest: "ssh://app01//var/www/{{ server_name }}/wordpress"
     ignore:
       - "Path .git/*"
       - "Name *.{log,tmp}"

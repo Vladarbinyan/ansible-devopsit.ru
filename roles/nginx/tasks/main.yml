@@ -30,6 +30,11 @@
 # Vhost configuration.
 - import_tasks: vhosts.yml
 
+# Install cert
+- include_tasks: install-ssl-cert.yml
+  when: ssl_cert_path is defined 
+
+
 # Nginx setup.
 - name: Copy nginx configuration in place.
   template:

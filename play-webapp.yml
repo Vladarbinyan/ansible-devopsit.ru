@@ -8,3 +8,4 @@
     - {role: nginx}
     - {role: php}
     - {role: wordpress}
+    - {role: unison}
