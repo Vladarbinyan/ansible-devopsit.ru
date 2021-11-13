@@ -1,13 +1,17 @@
 ---
+# порты для серверов приложений и mysql
+app_http_port: '80'
+app_https_port: '443'
+
+# web app section
 server_name: "devopsit.ru"  
 wp_version: 5.3.10
-# db_hostname: ""
+db_hostname: "db01.devopsit.ru"
 ssl_cert_path: "/etc/ssl"
 ssl_cert_source_path: "files/cert/"
 
 nginx_ssl_crt: "{{ ssl_cert_path }}/crt/{{ server_name }}.crt"
 nginx_ssl_key: "{{ ssl_cert_path }}/private/{{ server_name }}.key"
-
 
 nginx_remove_default_vhost: true
 

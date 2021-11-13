@@ -17,19 +17,21 @@
   tags: 
     - ufw
 
-- name: Allow http & https
-  block:
-    - name: Allow access http
-      ufw: 
-        rule: allow
-        port: "{{ app_http_port }}"
-        proto: tcp
-    - name: Allow access https
-      ufw: 
-        rule: allow
-        port: "{{ app_https_port }}"
-        proto: tcp
-  when: "'appservers' in group_names"
+- name: Allow access http
+  ufw: 
+    rule: allow
+    port: "{{ app_http_port }}"
+    proto: tcp
+  when: app_http_port is defined
+  tags:
+  - ufw_allow_web
+
+- name: Allow access https
+  ufw: 
+    rule: allow
+    port: "{{ app_https_port }}"
+    proto: tcp
+  when: app_https_port is defined
   tags:
   - ufw_allow_web
 
@@ -38,7 +40,7 @@
    rule: allow
    port: "{{ mysql_port }}"
    proto: tcp
-  when: "'dbservers' in group_names"
+  when: mysql_port is defined
   tags:
     - ufw_allow_mysql
 
@@ -47,37 +49,42 @@
    rule: allow
    port: "{{ prometheus_http }}"
    proto: tcp
-  when: "'monservers' in group_names"
+  when: prometheus_http is defined
   tags:
     - ufw_allow_prometheus_http
 
-- name: Allow access to alertmanager
-  block:
-    - name: Allow all access to alertmanager custom http port
-      ufw: 
-        rule: allow
-        port: "{{ alert_manager_http }}"
-        proto: tcp
-    - name: Allow all access to custom port tcp 
-      ufw: 
-        rule: allow
-        port: "{{ alert_manager }}"
-        proto: tcp
-    - name: Allow all access to custom port udp 
-      ufw: 
-        rule: allow
-        port: "{{ alert_manager }}"
-        proto: udp
-  when: "'monservers' in group_names"
+- name: Allow all access to alertmanager custom http port
+  ufw: 
+    rule: allow
+    port: "{{ alert_manager_http }}"
+    proto: tcp
+  when: alert_manager_http is defined
+  tags:
+  - ufw_allow_alertmanager
+
+- name: Allow all access to custom port tcp 
+  ufw: 
+    rule: allow
+    port: "{{ alert_manager }}"
+    proto: tcp
+  when: alert_manager is defined
+  tags:
+  - ufw_allow_alertmanager
+- name: Allow all access to custom port udp 
+  ufw: 
+    rule: allow
+    port: "{{ alert_manager }}"
+    proto: udp
+  when: alert_manager is defined
   tags:
   - ufw_allow_alertmanager
 
 - name: Allow access to node_exporter
   ufw:
    rule: allow
-   port: "{{ node_exporter }}"
+   port: "{{ node_exporter_tcp }}"
    proto: tcp
-  when: "'monservers' in group_names"
+  when: node_exporter_tcp is defined
   tags:
     - ufw_allow_node_exporter
 
@@ -85,8 +92,8 @@
 - name: Allow access to grafana
   ufw:
    rule: allow
-   port: "{{ grafana }}"
+   port: "{{ grafana_tcp }}"
    proto: tcp
-  when: "'monservers' in group_names"
+  when: grafana_tcp is defined
   tags:
     - ufw_allow_grafana
