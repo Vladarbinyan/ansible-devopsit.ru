@@ -11,3 +11,15 @@ unison_configs:
 unison_cron:
   hour: '*'
   minute: '*/5'
+
+
+# nginx upstreams
+
+nginx_upstreams: 
+- name: devopsit.ru
+  strategy: "ip_hash" # "least_conn", etc.
+  keepalive: 16 # optional 
+  servers: { 
+    "app02.devopsit.ru",
+    "app01.devopsit.ru weight=2",
+  }
