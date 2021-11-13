@@ -1,38 +1,31 @@
 
 
 stages:
-  - test
+#  - test
   - deploy
 
 variables:
   ANSIBLE_USER: $ansible_user
   ANSIBLE_PASSWORD: $ansible_password
 
-test-job:
-  stage: test
-  script:
-    - cat $ssh_key > id_rsa
-    - cat id_rsa
-    - cat $ssh_key_pub > id_rsa.pub
-    - cat id_rsa.pub
-  when: manual
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy   # It only runs when *both* jobs in the test stage complete successfully.
   image:
-    name: williamyeh/ansible:ubuntu18.04
-  script:
-    - mkdir ~/.ssh
-    - echo $ssh_key > ~/.ssh/id_rsa
-    - echo $ssh_key_pub > ~/.ssh/id_rsa.pub
-    - cat ~/.ssh/id_rsa
-    - cat ~/.ssh/id_rsa.pub
-    - chmod 600 ~/.ssh/id_rsa
-    - chmod 644 ~/.ssh/id_rsa.pub
+    name: gableroux/ansible:4.5.0
+  before_script:
+    # https://docs.gitlab.com/ee/ci/ssh_keys/
+    - eval $(ssh-agent -s)
+    - mkdir ~/.ssh/
+    - chmod 700 ~/.ssh
+#    - echo "$SSH_CONFIG" > ~/.ssh/config
+#    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - export ANSIBLE_HOST_KEY_CHECKING=False
     - ansible --version
-    - echo $ANSIBLE_USER
-    - echo $ANSIBLE_PASSWORD
-#    - ansible-playbook test.yml -u ubuntu -vvv --private-key ~/.ssh/id_rsa -i ./inventory/hosts.yml
-    - ansible-playbook test.yml -i ./inventory/hosts.yml -e ansible_user=$ANSIBLE_USER -e ansible_password=$ANSIBLE_PASSWORD -vvv
+#    - echo $ANSIBLE_USER
+#    - echo $ANSIBLE_PASSWORD
+    - ansible-playbook test.yml -vvv -i ./inventory/hosts.yml
+#    - ansible-playbook test.yml -i ./inventory/hosts.yml -e ansible_user=$ANSIBLE_USER -e ansible_password=$ANSIBLE_PASSWORD -vvv
   when: manual
