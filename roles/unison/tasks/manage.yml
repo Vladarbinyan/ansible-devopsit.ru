@@ -1,4 +1,3 @@
-
 - name: Create Unison config folder
   file:
     path: "/home/backup-data/.unison"
@@ -10,7 +9,7 @@
 
 - name: Change permissions for backup source dir
   file:
-    path: {{ item.src }}
+    path: "{{ item.src }}"
     mode: 0775
     recurse: yes
   with_items: "{{ unison_configs }}" 
