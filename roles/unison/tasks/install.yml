@@ -10,9 +10,9 @@
   copy:
     src: '{{ file.name }}'
     mode: '{{ file.mode }}'
-    owner: www-data
+    owner: backup-data
     group: www-data
-    dest: '/home/www-data/.ssh/'
+    dest: '/home/backup-data/.ssh/'
     force: yes
   loop:
     - mode: '600'
