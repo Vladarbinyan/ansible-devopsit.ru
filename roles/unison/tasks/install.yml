@@ -1,10 +1,17 @@
-
 - name: Install packet
   apt:
     update_cache: yes
     cache_valid_time: 3600
     name: unison
     state: latest
+
+
+- name: Create user backup-data
+  user:
+    name: backup-data
+    group: www-data
+    password_lock: "yes"
+
 
 - name: Copy SSH keys
   copy:

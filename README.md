@@ -28,6 +28,8 @@ ansible-playbook play-db.yml -u ubuntu --extra-vars "target=dbservers" --ask-vau
 
 ansible-playbook play-webapp.yml -u ubuntu --extra-vars "target=appservers" --ask-vault-pass  
 
+ansible-playbook play-monitoring.yml -u ubuntu --extra-vars "target=monservers" --ask-vault-pass
+
 License
 -------
 
