@@ -1,5 +1,4 @@
 
-
 stages:
 #  - test
   - deploy
@@ -17,12 +16,13 @@ deploy-job:
     - export ANSIBLE_HOST_KEY_CHECKING=False
     - echo "$ANSIBLE_VAULT_PASS" > ./vault_pass
     - ansible --version
-    - ansible-playbook play-deploy-ssh-keys.yml -u ubuntu --extra-vars "target=production" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
-    - ansible-playbook play-commontools.yml -u ubuntu --extra-vars "target=production" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
-    - ansible-playbook play-firewall.yml -u ubuntu --extra-vars "target=production" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
-    - ansible-playbook play-db.yml -u ubuntu --extra-vars "target=dbservers" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
-    - ansible-playbook play-webapp.yml -u ubuntu --extra-vars "target=appservers" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
-    - ansible-playbook play-monitoring.yml -u ubuntu --extra-vars "target=monservers" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+#    - ansible-playbook play-deploy-ssh-keys.yml -u ubuntu --extra-vars "target=production" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+#    - ansible-playbook play-commontools.yml -u ubuntu --extra-vars "target=production" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+#    - ansible-playbook play-firewall.yml -u ubuntu --extra-vars "target=production" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+#    - ansible-playbook play-db.yml -u ubuntu --extra-vars "target=dbservers" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+#    - ansible-playbook play-webapp.yml -u ubuntu --extra-vars "target=appservers" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+#    - ansible-playbook play-monitoring.yml -u ubuntu --extra-vars "target=monservers" -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
+    - ansible-playbook play-all.yml -u ubuntu -v -i ./inventory/hosts.yml --vault-password-file ./vault_pass
 
   only: 
     - main
