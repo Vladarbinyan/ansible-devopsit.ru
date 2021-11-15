@@ -1,17 +1,25 @@
-
 - name: Create Unison config folder
   file:
-    path: "/home/www-data/.unison"
-    owner: www-data
+    path: "/home/backup-data/.unison"
+    owner: backup-data
     group: www-data
     state: directory
     mode: 0755
 
+
+- name: Change permissions for backup source dir
+  file:
+    path: "{{ item.src }}"
+    mode: 0775
+    recurse: yes
+  with_items: "{{ unison_configs }}" 
+
+
 - name: Generate Unison config file
   template:
     src: sync.prf.j2
-    dest: /home/www-data/.unison/{{ item.name }}.prf
-    owner: www-data
+    dest: /home/backup-data/.unison/{{ item.name }}.prf
+    owner: backup-data
     group: www-data
     mode: 0644
   with_items: "{{ unison_configs }}"
@@ -23,4 +31,4 @@
     minute: '{{ unison_cron.minute }}'
     hour: '{{ unison_cron.hour }}'
     job: "unison sync-wordpress.prf"
-    user: www-data
+    user: backup-data

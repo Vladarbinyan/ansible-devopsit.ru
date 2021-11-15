@@ -1,0 +1,8 @@
+---
+- hosts: "{{ target }}"
+  become: yes
+  become_method: sudo
+  roles:
+    - {role: prometheus}
+    - {role: alertmanager}
+    - {role: grafana}

@@ -1,4 +1,3 @@
-
 - name: Install packet
   apt:
     update_cache: yes
@@ -6,13 +5,21 @@
     name: unison
     state: latest
 
+
+- name: Create user backup-data
+  user:
+    name: backup-data
+    group: www-data
+    password_lock: "yes"
+
+
 - name: Copy SSH keys
   copy:
     src: '{{ file.name }}'
     mode: '{{ file.mode }}'
-    owner: www-data
+    owner: backup-data
     group: www-data
-    dest: '/home/www-data/.ssh/'
+    dest: '/home/backup-data/.ssh/'
     force: yes
   loop:
     - mode: '600'
