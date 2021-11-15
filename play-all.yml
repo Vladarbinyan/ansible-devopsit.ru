@@ -18,7 +18,12 @@
   vars:
     target: dbservers
 
-- name: Deploy DB
+- name: Deploy webapp servers
   import_playbook: play-webapp.yml 
   vars:
     target: appservers
+    
+- name: Deploy monitoring server
+  import_playbook: play-monitoring.yml 
+  vars:
+    target: monservers
