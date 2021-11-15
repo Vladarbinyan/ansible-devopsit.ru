@@ -22,3 +22,5 @@ nginx_upstreams:
     "127.0.0.1:9000",
     "app02.devopsit.ru:9000 weight=2",
   }
+
+php_fpm_listen_allowed_clients: "app01,app02"
