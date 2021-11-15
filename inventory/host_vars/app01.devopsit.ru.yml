@@ -19,6 +19,6 @@ nginx_upstreams:
   strategy: "ip_hash" # "least_conn", etc.
   keepalive: 16 # optional 
   servers: { 
-    "127.0.0.1",
-    "app02.devopsit.ru weight=2",
+    "127.0.0.1:9000",
+    "app02.devopsit.ru:9000 weight=2",
   }
