@@ -1,0 +1,24 @@
+- name: Deploy ssh keys
+  import_playbook: play-deploy-ssh-keys.yml
+  vars:
+    target: production
+
+- name: Deploy commontools
+  import_playbook: play-commontools.yml
+  vars:
+    target: production
+
+- name: Deploy firewall
+  import_playbook: play-firewall.yml
+  vars:
+    target: production
+
+- name: Deploy DB
+  import_playbook: play-db.yml
+  vars:
+    target: dbservers
+
+- name: Deploy DB
+  import_playbook: play-webapp.yml 
+  vars:
+    target: appservers

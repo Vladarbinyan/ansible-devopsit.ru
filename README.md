@@ -13,6 +13,9 @@ Dependencies
 Playbooks
 ----------------
 
+Для полного развертывания можно запустить один плейбук:  
+
+ansible-playbook play-all.yml -u ubuntu --ask-vault-pass
 
 
 Play samples

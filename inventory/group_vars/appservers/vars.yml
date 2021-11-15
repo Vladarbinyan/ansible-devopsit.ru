@@ -2,6 +2,7 @@
 # порты для серверов приложений и mysql
 app_http_port: '80'
 app_https_port: '443'
+app_fastcgi: '9000'
 
 # web app section
 server_name: "devopsit.ru"  
@@ -47,7 +48,7 @@ nginx_vhosts:
     extra_parameters: |
       location ~ \.php$ {
           fastcgi_split_path_info ^(.+\.php)(/.+)$;
-          fastcgi_pass 127.0.0.1:9000;
+          fastcgi_pass backend:9000;
           fastcgi_index index.php;
           fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
           include fastcgi_params;

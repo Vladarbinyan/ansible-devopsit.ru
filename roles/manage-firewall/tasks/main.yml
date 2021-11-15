@@ -35,6 +35,15 @@
   tags:
   - ufw_allow_web
 
+- name: Allow access fastcgi
+  ufw: 
+    rule: allow
+    port: "{{ app_fastcgi }}"
+    proto: tcp
+  when: app_fastcgi is defined
+  tags:
+  - ufw_allow_web
+
 - name: Allow access to mysql
   ufw:
    rule: allow

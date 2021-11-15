@@ -15,10 +15,10 @@ unison_cron:
 # nginx upstreams
 
 nginx_upstreams: 
-- name: devopsit.ru
+- name: backend
   strategy: "ip_hash" # "least_conn", etc.
   keepalive: 16 # optional 
   servers: { 
-    "app01.devopsit.ru",
+    "127.0.0.1",
     "app02.devopsit.ru weight=2",
   }
