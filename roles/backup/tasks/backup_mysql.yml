@@ -1,0 +1,33 @@
+- name: Создаем файлы скриптов на удаленном хосте
+  template:
+    src: "{{ path.src }}"
+    dest: "{{ backup_scripts_folder }}/{{ path.dest }}"
+    owner: backup-data
+    group: www-data
+    mode: "0700"
+  loop:
+    - src: "backup_mysql.sh.j2"
+      dest: "backup_mysql.sh"
+      backup_dir: "{{ backup_mysql_folder }}"
+      backup_db: "{{ mysql_db }}"
+  loop_control:
+    loop_var: path
+  
+
+- name: Добавляем пользователю backup-data файл авторизации для MySQL
+  template:
+    src: ".my.cnf.j2"
+    dest: "/home/backup-data/.my.cnf"
+    owner: backup-data
+    group: www-data
+    mode: "0600"
+
+- name: Добавляем задания в cron пользователя backup-data
+  cron:
+    name: backup_DB
+    minute: "45"
+    hour: "13"
+    job: "{{item}}"
+    user: backup-data
+  loop:
+    - "{{ backup_scripts_folder }}/backup_mysql.sh >> /var/log/backup/backup_mysql.log"

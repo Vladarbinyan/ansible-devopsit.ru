@@ -1,0 +1,24 @@
+- name: Создаем файлы скриптов на удаленном хосте
+  template:
+    src: "{{ path.src }}"
+    dest: "{{ backup_scripts_folder }}/{{ path.dest }}"
+    owner: backup-data
+    group: www-data
+    mode: "0700"
+  loop:
+    - src: "backup_www.sh.j2"
+      dest: "backup_www.sh"
+      backup_dir: "{{ backup_app_folder }}"
+      backup_www: "{{ app_root_folder }}"
+  loop_control:
+    loop_var: path
+  
+- name: Добавляем задания в cron пользователя backup-data
+  cron:
+    name: backup_www
+    minute: "45"
+    hour: "13"
+    job: "{{item}}"
+    user: backup-data
+  loop:
+    - "{{ backup_scripts_folder }}/backup_www.sh >> /var/log/backup/backup_www.log"

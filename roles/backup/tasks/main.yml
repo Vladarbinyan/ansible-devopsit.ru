@@ -1,0 +1,29 @@
+---
+# tasks file for roles/backup
+
+- name: Create user backup-data
+  user:
+    name: backup-data
+    group: www-data
+    password_lock: "yes"
+  when: backup_folders is defined
+
+- name: Создаем директории для скриптов и backup-ов
+  file:
+    path: "{{item}}"
+    state: directory
+    owner: backup-data
+    group: www-data
+    mode: "0755"
+    recurse: yes
+  loop:
+    "{{ backup_folders }}"
+  when: backup_folders is defined
+
+- name: Include task 'Backup web app'
+  include_tasks: backup_www.yml
+  when: backup_app_folder is defined 
+
+- name: Include task 'Backup mysql DB'
+  include_tasks: backup_mysql.yml
+  when: backup_mysql_folder is defined
