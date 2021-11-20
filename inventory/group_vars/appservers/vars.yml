@@ -10,23 +10,14 @@ wp_version: 5.3.10
 db_hostname: "db01.devopsit.ru"
 ssl_cert_path: "/etc/ssl"
 ssl_cert_source_path: "files/cert/"
+app_root_folder: "/var/www/{{ server_name }}/wordpress"
+
+# nginx configuration
 
 nginx_ssl_crt: "{{ ssl_cert_path }}/crt/{{ server_name }}.crt"
 nginx_ssl_key: "{{ ssl_cert_path }}/private/{{ server_name }}.key"
 
 nginx_remove_default_vhost: true
-
-# nginx upstreams defined in hostvars
-
-# nginx_upstreams: 
-# - name: devopsit.ru
-#   strategy: "ip_hash" # "least_conn", etc.
-#   keepalive: 16 # optional 
-#   servers: { 
-#     "app01.devopsit.ru",
-#     "app02.devopsit.ru weight=2",
-#   }
-
 
 nginx_vhosts:
   - listen: "80"
@@ -37,7 +28,7 @@ nginx_vhosts:
   - listen: "443 ssl http2"
   # - listen: "80"
     server_name: "{{ server_name }}"
-    root: "/var/www/{{ server_name }}/wordpress"
+    root: "{{ app_root_folder }}"
     index: "index.php index.html index.htm"
     error_page: "500 502 503 504  /50x.html"
     access_log: "/var/log/nginx/{{ server_name }}.access.log  main"
@@ -86,4 +77,11 @@ php_packages:
   - php-zip
   - php-mysql
 
+# backup
+backup_app_folder: "{{ backup_destination_folder }}/www"
 
+backup_folders:
+  - "{{ backup_scripts_folder }}"
+  - "{{ backup_destination_folder }}"
+  - "{{ backup_app_folder }}"
+  - "/var/log/backup"

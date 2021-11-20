@@ -1,4 +1,4 @@
-
+# in vault
 # mysql_db: "" 
 # mysql_user: ""
 # mysql_password: "!"
@@ -15,3 +15,12 @@ mysql_users:
     host: "%"
     password: "{{ mysql_password }}"
     priv: "wordpress.*:ALL"
+
+# backup
+backup_mysql_folder: "{{ backup_destination_folder }}/mysql/"
+
+backup_folders:
+  - "{{ backup_scripts_folder }}"
+  - "{{ backup_destination_folder }}"
+  - "{{ backup_mysql_folder }}"
+  - "/var/log/backup"

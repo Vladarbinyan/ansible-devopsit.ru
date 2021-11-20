@@ -27,3 +27,9 @@
   import_playbook: play-monitoring.yml 
   vars:
     target: monservers
+
+- name: Configure backup
+  import_playbook: play-backup.yml
+  vars:
+    target: production
+  
