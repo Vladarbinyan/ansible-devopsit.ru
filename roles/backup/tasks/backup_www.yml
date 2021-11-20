@@ -16,8 +16,8 @@
 - name: Добавляем задания в cron пользователя backup-data
   cron:
     name: backup_www
-    minute: "45"
-    hour: "13"
+    minute: "30"
+    hour: "11"
     job: "{{item}}"
     user: backup-data
   loop:
