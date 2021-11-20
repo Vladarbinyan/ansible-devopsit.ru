@@ -8,4 +8,4 @@
     - {role: wordpress}
     - {role: unison}
     - {role: node_exporter}
-    - {role: telegraf, tags: [telegraf_appservers]}
+    - {role: telegraf_appserver}

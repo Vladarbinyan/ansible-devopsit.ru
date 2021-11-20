@@ -8,4 +8,4 @@
     - {role: alertmanager}
     - {role: grafana}
     - {role: influxdb}
-    - {role: telegraf, tags: [telegraf_monservers]}
+    - {role: telegraf_monserver}
