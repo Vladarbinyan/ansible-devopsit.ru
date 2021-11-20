@@ -1,8 +1,11 @@
 ---
-# порты для серверов приложений и mysql
+# Порты для серверов приложений 
 app_http_port: '80'
 app_https_port: '443'
 app_fastcgi: '9000'
+# Мониторинг
+nginx_stub_metrics: "8080"
+
 
 # web app section
 server_name: "devopsit.ru"  

@@ -3,3 +3,7 @@
 # backup global settings
 backup_destination_folder: "/var/opt/backups"
 backup_scripts_folder: "/usr/local/bin"
+
+# firewall
+
+node_exporter_tcp: '9100' 

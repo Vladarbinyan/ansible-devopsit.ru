@@ -44,6 +44,16 @@
   tags:
   - ufw_allow_web
 
+- name: Allow to collect nginx_stub_metrics
+  ufw: 
+    rule: allow
+    port: "{{ nginx_stub_metrics }}"
+    proto: tcp
+  when: nginx_stub_metrics is defined
+  tags:
+  - ufw_allow_nginx_stub_metrics
+
+
 - name: Allow access to mysql
   ufw:
    rule: allow
@@ -52,6 +62,16 @@
   when: mysql_port is defined
   tags:
     - ufw_allow_mysql
+
+- name: Allow access to mysqld_exporter
+  ufw:
+   rule: allow
+   port: "{{ mysqld_exporter }}"
+   proto: tcp
+  when: mysqld_exporter is defined
+  tags:
+    - ufw_allow_mysqld_exporter
+
 
 - name: Allow access to prometheus
   ufw:
@@ -96,6 +116,15 @@
   when: node_exporter_tcp is defined
   tags:
     - ufw_allow_node_exporter
+
+- name: Allow access to InfluxDB
+  ufw:
+   rule: allow
+   port: "{{ influxdb_tcp }}"
+   proto: tcp
+  when: influxdb_tcp is defined
+  tags:
+    - ufw_allow_InfluxDB
 
 
 - name: Allow access to grafana

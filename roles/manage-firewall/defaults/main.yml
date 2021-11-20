@@ -9,6 +9,10 @@
     # TCP 9093 — http для алерт менеджера.
     # TCP и UDP 9094 — для алерт менеджера.
     # TCP 9100 — для node_exporter.
+# порт 8086 для сервера мониторинга InfluDB
+# порты 9100 для всех, node_exporter
+# порт 9104 на сервере БД mysqld_exporter
+# порт 8080 на серверах приложений nginx_stub_metrics
     
 # prometheus_http: '9090'
 # grafana_tcp: '3000'

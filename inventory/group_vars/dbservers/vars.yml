@@ -1,10 +1,14 @@
-# in vault
+# in vault:
 # mysql_db: "" 
 # mysql_user: ""
 # mysql_password: "!"
 
-mysql_port: '3306'
+# firewall
+# порт 9104 на сервере БД для мониторинга
+mysqld_exporter: "9104"
+mysql_port: "3306"
 
+# DB vars
 mysql_databases:
   - name: "{{ mysql_db }}"
     encoding: utf8

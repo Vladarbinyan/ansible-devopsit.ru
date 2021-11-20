@@ -1,5 +1,5 @@
-prometheus_http: '9090'
-grafana_tcp: '3000'
-alert_manager_http: '9093'
-alert_manager: '9094'
-node_exporter_tcp: '9100' 
+prometheus_http: "9090"
+grafana_tcp: "3000"
+alert_manager_http: "9093"
+alert_manager: "9094"
+influxdb_tcp: "8086"

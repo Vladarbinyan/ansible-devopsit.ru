@@ -1,0 +1,12 @@
+# backup_destination_folder: "/var/opt/backups"
+# backup_scripts_folder: "/usr/local/bin"
+
+# backup_app_folder: "{{ backup_destination_folder }}/www"
+# backup_mysql_folder: "{{ backup_destination_folder }}/mysql/"
+
+# backup_folders:
+#   - "{{ backup_scripts_folder }}"
+#   - "{{ backup_destination_folder }}"
+#   - "{{ backup_app_folder }}"
+#   - "{{ backup_mysql_folder }}"
+#   - "/var/log/backup"

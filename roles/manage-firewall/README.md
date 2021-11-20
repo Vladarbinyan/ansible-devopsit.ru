@@ -3,6 +3,26 @@
 
 Role Variables
 --------------
+# # порты для серверов приложений и mysql
+# app_http_port: '80'
+# app_https_port: '443'
+# mysql_port: '3306'
+
+# для сервера мониторинга 
+    # TCP 9090 — http для сервера прометеус.
+    # TCP 9093 — http для алерт менеджера.
+    # TCP и UDP 9094 — для алерт менеджера.
+    # TCP 9100 — для node_exporter.
+# порт 8086 для сервера мониторинга InfluDB
+# порты 9100 для всех, node_exporter
+# порт 9104 на сервере БД mysqld_exporter
+# порт 8080 на серверах приложений nginx_stub_metrics
+    
+# prometheus_http: '9090'
+# grafana_tcp: '3000'
+# alert_manager_http: '9093'
+# alert_manager: '9094'
+# node_exporter_tcp: '9100' 
 
 Dependencies
 ------------
@@ -32,4 +52,3 @@ MIT
 Author Information
 ------------------
 
-https://github.com/Vladarbinyan/
