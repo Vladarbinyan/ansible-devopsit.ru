@@ -1,2 +1,2 @@
-telegraf_output: "{{ telegraf.output | default('monitoring.devopsit.ru') }}"
+telegraf_output: monitoring.devopsit.ru
 
