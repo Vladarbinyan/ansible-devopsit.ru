@@ -24,7 +24,7 @@
 
 - name: Добавляем задания в cron пользователя backup-data
   cron:
-    name: backup_DB
+    name: Backup_DB
     minute: "30"
     hour: "11"
     job: "{{item}}"

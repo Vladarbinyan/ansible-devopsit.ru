@@ -16,4 +16,4 @@ echo "$date Backing up MySQL database '$backup_db' from '$Host' to: $file"
 
 # Создание бэкапа, и в случае успешного выполнения - удаление бэкапов старше 3-х суток
 $Dump -h localhost $backup_db | gzip > $file && \
-    /usr/bin/find $backup_dir -mtime +3 -delete
+    /usr/bin/find $backup_dir -mtime +3 -delete 
