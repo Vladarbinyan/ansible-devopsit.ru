@@ -1,0 +1,21 @@
+- name: Add stubs_metrics for nginx
+  copy: 
+    src: telegraf/stub_status
+    dest: /etc/nginx/sites-enabled
+    mode: 0644
+    owner: root
+    group: root
+  notify: validate nginx configuration
+  notify: reload nginx
+
+
+- name: Create config file for Telegraf
+  template:
+    backup: yes
+    src: telegraf.conf.appservers.j2
+    dest: /etc/telegraf/telegraf.conf
+    owner: root
+    group: root
+  notify: telegraf-config:restart
+  
+

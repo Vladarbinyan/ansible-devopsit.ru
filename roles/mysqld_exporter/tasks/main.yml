@@ -1,0 +1,57 @@
+---
+# tasks file for mysql_exporter
+
+- name: Create user group mysqld_exporter
+  group: name="mysqld_exporter"
+  become: true
+
+
+- name: Create user mysqld_exporter
+  user:
+    name: "mysqld_exporter"
+    group: "mysqld_exporter"
+    system: yes
+    shell: "/sbin/nologin"
+    comment: "mysqld_exporter nologin User"
+    createhome: "yes"
+    state: present
+
+
+- name: Download source files to temp directory and unarchive
+  unarchive:
+    src: "https://github.com/prometheus/mysqld_exporter/releases/download/v{{version}}/mysqld_exporter-{{version}}.linux-amd64.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+
+
+- name: Copy files to bin directory
+  copy:
+    src: "/tmp/mysqld_exporter-{{ version }}.linux-amd64/mysqld_exporter"
+    dest: "/usr/local/bin/mysqld_exporter"
+    owner: "mysqld_exporter"
+    group: "mysqld_exporter"
+    remote_src: yes
+    mode: 0755
+    
+    
+- name: Copy conf file for connect to mysqld
+  copy:
+    src: "config/my.cnf"
+    dest: "/home/mysqld_exporter/.my.cnf"
+    owner: "mysqld_exporter"
+    group: "mysqld_exporter"
+    mode: 0644
+
+
+- name: Add init file for service
+  template:
+    src: init.service.j2
+    dest: /etc/systemd/system/mysqld_exporter.service
+
+
+- name: Enable and start service node_exporter
+  service:
+    name: mysqld_exporter
+    state: started
+    enabled: yes
+

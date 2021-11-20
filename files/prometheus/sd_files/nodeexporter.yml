@@ -1,0 +1,6 @@
+- targets:
+  - 'localhost:9100'
+  - 'app01.devopsit.ru:9100'
+  - 'app02.devopsit.ru:9100'
+  - 'db01.devopsit.ru:9100'
+  

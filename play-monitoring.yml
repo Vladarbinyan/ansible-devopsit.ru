@@ -3,6 +3,9 @@
   become: yes
   become_method: sudo
   roles:
+    - {role: node_exporter}
     - {role: prometheus}
     - {role: alertmanager}
     - {role: grafana}
+    - {role: influxdb}
+    - {role: telegraf, tags: [telegraf_monservers]}

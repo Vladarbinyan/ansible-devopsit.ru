@@ -1,0 +1,4 @@
+---
+# vars file for mysql_exporter
+
+version: 0.12.1

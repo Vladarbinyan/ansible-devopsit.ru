@@ -4,4 +4,7 @@
 
   
 - name: Install Grafana
-  include_tasks: tasks/install_grafana.yml
+  include_tasks: tasks/install.yml
+  
+- name: Configure Grafana
+  include_tasks: tasks/configure.yml

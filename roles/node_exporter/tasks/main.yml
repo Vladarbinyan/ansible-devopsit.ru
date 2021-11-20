@@ -1,0 +1,48 @@
+#Tasks for role "node-exprorter"
+---
+
+- name: Create user group node_exporter
+  group: name="node_exporter"
+  become: true
+
+
+- name: Create user node_exporter
+  user:
+    name: "node_exporter"
+    group: "node_exporter"
+    system: yes
+    shell: "/sbin/nologin"
+    comment: "node_exporter nologin User"
+    createhome: "no"
+    state: present
+
+
+- name: Download source files to temp directory and unarchive
+  unarchive:
+    src: "https://github.com/prometheus/node_exporter/releases/download/v{{ version }}/node_exporter-{{ version }}.linux-amd64.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+
+
+- name: Copy files to bin directory
+  copy:
+    src: "/tmp/node_exporter-{{ version }}.linux-amd64/node_exporter"
+    dest: "/usr/local/bin/node_exporter"
+    owner: "node_exporter"
+    group: "node_exporter"
+    remote_src: yes
+    mode: 0755
+
+
+- name: Add init file for service
+  template:
+    src: init.service.j2
+    dest: /etc/systemd/system/node_exporter.service
+
+
+- name: Enable and start service node_exporter
+  service:
+    name: node_exporter
+    state: started
+    enabled: yes
+

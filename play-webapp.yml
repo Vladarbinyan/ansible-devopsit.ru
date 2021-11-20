@@ -7,3 +7,5 @@
     - {role: php}
     - {role: wordpress}
     - {role: unison}
+    - {role: node_exporter}
+    - {role: telegraf, tags: [telegraf_appservers]}

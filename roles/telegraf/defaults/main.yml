@@ -1,0 +1,2 @@
+telegraf_output: "{{ telegraf.output | default('monitoring.devopsit.ru') }}"
+

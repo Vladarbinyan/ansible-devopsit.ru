@@ -4,4 +4,7 @@
 - name: systemd reload
   systemd:
     daemon_reload: yes
+    
+- name: reload prometheus
+  service: name=prometheus state=reloaded
 

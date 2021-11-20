@@ -4,3 +4,5 @@
   become_method: sudo
   roles:
     - {role: mysql}
+    - {role: node_exporter}
+    - {role: mysqld_exporter}
