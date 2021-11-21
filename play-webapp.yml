@@ -3,8 +3,8 @@
   become: yes
   become_method: sudo
   roles:
-    - {role: nginx}
     - {role: php}
+    - {role: nginx}
     - {role: wordpress}
     - {role: unison}
     - {role: node_exporter}
